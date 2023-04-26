@@ -63,7 +63,7 @@ int replace_vars(info_t *func)
 
 		if (!_strcmp(func->argv[i], "$?"))
 		{
-			num_str = convert_number(func->status, 10, 0)
+			num_str = convert_number(func->status, 10, 0);
 			replace_string(&(func->argv[i]), _strdup(num_str));
 			free(num_str);
 			continue;
@@ -81,20 +81,20 @@ int replace_vars(info_t *func)
 			replace_string(&(func->argv[i]), _strdup(_strchr(node->str, '=') + 1));
 			continue;
 		}
-		replace_string(&(func->argv[i], _strdup(""));
+		replace_string(&func->argv[i], _strdup(""));
 	}
 	return (0);
 }
 
 /**
- * memset - function fills memory with constant byte
+ * _memset - function fills memory with constant byte
  * @ptr: pointer to the memory area
  * @a: byte to set
  * @n: number of bytes to set
  * Return: pointer to memory area
  */
 
-char *memset(char *ptr, char a, unsigned int n)
+char *_memset(char *ptr, char a, unsigned int n)
 {
 	unsigned int i;
 

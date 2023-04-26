@@ -15,13 +15,13 @@ char **strtow(const char *str, const char *del)
 	if (str == NULL || *str == '\0')
 		return (NULL);
 	if (del == NULL)
-		del = DEFAULT_DELIM;
-	for (i = 0, str[i] != '\0', i++)
+		del = " ";
+	for (i = 0; str[i] != '\0'; i++)
 		if (!check_del(str[i], del) && (check_del(str[i + 1], del) || !str[i + 1]))
 			numwords++;
 	if (numwords == 0)
 		return (NULL);
-	words = malloc(numwords + 1) * sizeof(char *));
+	words = malloc((1 + numwords) * sizeof(char));
 	if (words == NULL)
 		return (NULL);
 	for (i = 0, j = 0; j < numwords; j++)
@@ -29,7 +29,7 @@ char **strtow(const char *str, const char *del)
 		while (check_del(str[i], del))
 			i++;
 		k = 0;
-		while (!check_del(str[i + k], del) && stri + k)
+		while (!check_del(str[i + k], del) && str[i] + k)
 			k++;
 		words[j] = malloc((k + 1) * sizeof(char));
 		if (!words[j])
@@ -111,7 +111,7 @@ int chain_del(info_t *func, char *buf, size_t *pos)
 	{
 		buf[a] = 0;
 		a++;
-		funcc->cmd_buf_type = CMD_OR;
+		func->cmd_buf_type = CMD_OR;
 	}
 	else if (buf[a] == '&' && buf[a + 1] == '&')
 	{
@@ -179,7 +179,7 @@ void *_realloc(void *ptr, unsigned int old, unsigned int neww)
 
 	if (ptr == NULL)
 		return (malloc(neww));
-	if (neww == NULL)
+	if (!neww)
 		return (free(ptr), NULL);
 	if (neww == old)
 		return (ptr);
