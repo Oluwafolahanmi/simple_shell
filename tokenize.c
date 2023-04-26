@@ -169,26 +169,26 @@ void check_chain(info_t *func, char *buf, size_t *pos, size_t i, size_t len)
  * _realloc - reallocate memory block
  * @ptr: pointer to previous block
  * @old: size of old block
- * @new: size of new block
+ * @neww: size of new block
  * Return: pointer to old block
  */
 
-void *_realloc(void *ptr, unsigned int old, unsigned int new)
+void *_realloc(void *ptr, unsigned int old, unsigned int neww)
 {
 	char *b;
 
 	if (ptr == NULL)
-		return (malloc(new));
-	if (new == NULL)
+		return (malloc(neww));
+	if (neww == NULL)
 		return (free(ptr), NULL);
-	if (new == old)
+	if (neww == old)
 		return (ptr);
 
-	b = malloc(new);
+	b = malloc(neww);
 	if (b == NULL)
 		return (NULL);
 
-	old = old < new ? old : new;
+	old = old < neww ? old : neww;
 	while (old--)
 		b[old] = ((char *)ptr)[old];
 	free(ptr);

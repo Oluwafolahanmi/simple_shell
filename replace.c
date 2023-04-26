@@ -32,14 +32,14 @@ int replace_alias(info_t *func)
 /**
  * replace_string - function replaces string
  * @old: old string address
- * @new: new string
+ * @neww: new string
  * Return: 1 if replaced
  */
 
-int replace_string(char **old, char *new)
+int replace_string(char **old, char *neww)
 {
 	free(*old);
-	*old = new;
+	*old = neww;
 	return (1);
 }
 
