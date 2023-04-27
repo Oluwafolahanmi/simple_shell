@@ -35,7 +35,7 @@ int check_alpha(int a)
  * Return: 1 on success
  */
 
-int prompt(fun_t *func)
+int prompt(info_t *func)
 {
 	if (isatty(STDIN_FILENO) && func->readfd <= 2)
 		return (1);
@@ -53,26 +53,31 @@ int prompt(fun_t *func)
 
 int _atoi(char *s)
 {
-	int sign = 1, output = 0;
+	int i, sign = 1;
+	int output, flag = 0;
+	unsigned int result = 0;
 
-	while (isspace(*s))
-		s++;
-
-	if (*s == '-')
+	for (i = 0; s[i] != '\0' && flag != 2; i++)
 	{
-		sign = -1;
-		s++;
+		if (s[i] == '-')
+			sign *= -1;
+		if (s[i] >= '0' && s[i] <= '9')
+		{
+			flag = 1;
+			result *= 10;
+			result += (s[i] - '0');
+		}
+		else if (flag == 1)
+			flag = 2;
 	}
-	else if (*s == '+')
-		s++;
-
-	while (isdigit(*s))
-	{
-		output = output * 10 + (*s - '0');
-		s++;
-	}
-	return (sign * ouput);
+	if (sign == -1)
+		output = -result;
+	else
+		output = result;
+	return (output);
 }
+
+
 
 /**
  * exit_shell - function that exit shell\
@@ -95,7 +100,7 @@ int exit_shell(info_t *func)
 			_eputchar('\n');
 			return (1);
 		}
-		func->err_num = exitvital;
+		func->err_num = exitval;
 	}
 	else
 		func->err_num = -1;

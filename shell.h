@@ -115,4 +115,21 @@ int replace_vara(info_t *func);
 char *_memset(char *ptr, char a, unsigned int n);
 void _free(char **str);
 
+char **strtow(char *str, char *del);
+char **str_split(char *str, char del);
+int chain_del(info_t *func, char *buf, size_t *pos);
+void check_chain(info_t *func, char *buf, size_t *pos, size_t i, size_t len);
+void *_realloc(void *ptr, unsigned int old, unsigned int neww);
+
+int check_del(char c, char *del);
+int check_alpha(int a);
+int prompt(info_t *func);
+int _atoi(char *s);
+int exit_shel(info_t *func);
+
+void _eputs(char *str);
+int _eputchar(char c);
+int _putfd(char c, int fd);
+int _putsfd(char *str, int fd);
+
 #endif
