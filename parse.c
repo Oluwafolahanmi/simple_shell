@@ -51,7 +51,7 @@ char *dup_chars(char *path_str, int start, int end)
  * Return: full path of cmd
  */
 
-char find_path(info_t *func, char *path_str, char *cmd)
+char *find_path(info_t *func, char *path_str, char *cmd)
 {
 	int i, current;
 	char *path;
